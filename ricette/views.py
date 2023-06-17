@@ -188,24 +188,13 @@ def aggiungi(request):
         ingredienti = request.POST.get("Ingredienti")
         tempo = request.POST.get("Tempo")
         difficoltà = request.POST.get("Difficoltà")
-        immagine = request.FILES.get("Immagine")
-        
+        immagine = request.FILES.get("Immagine.url")
         for r in Ricetta.objects.all():
-            if r.nome == nome:
+            if (r.nome == nome):
                 context = {
                     "error": "Ricetta già presente"
                 }
                 return render(request, 'ricette/aggiungi.html', context)
-        
-        ricetta_object = Ricetta.objects.create(
-            immagine=immagine,
-            nome=nome,
-            ingredienti=ingredienti,
-            difficoltà=difficoltà,
-            tempo=tempo,
-            descrizione=descrizione,
-            categoria=categoria
-        )
+        ricetta_object = Ricetta.objects.create(immagine=immagine, nome=nome, ingredienti=ingredienti, difficoltà=difficoltà, tempo=tempo, descrizione=descrizione, categoria=categoria)
         return redirect('/home/accesso')
-    
     return render(request, 'ricette/aggiungi.html', {})
