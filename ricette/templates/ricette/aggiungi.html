@@ -1,0 +1,97 @@
+{% extends 'ricette/common.html' %}
+
+{% block content %}
+    <!-- Image and text -->
+    <nav class="navbar" style="background-color: darkorange;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'accesso' %}">
+                {% load static %}
+                <img src="{% static 'ricette/logo3.png' %}" alt="" width="35" height="30" class="d-inline-block align-top" style="background-color: transparent;">
+                <span class="text-dark">Cucinando</span>
+            </a>
+        </div>
+    </nav>
+    <div class="container my-5 text-center" style="max-width:580px">
+         <h1>Crea la tua ricetta!</h1>
+         <p class="lead">Cosa aspetti, condividi le tue migliori ricette.</p>
+
+         <form class="row g-3" method="post" enctype="multipart/form-data" style="margin-top: 1%">{% csrf_token %}
+
+                    <div class="form-floating mb-3 col-12">
+                        <input type="text" class="form-control" id="floatingInput" name="Nome" placeholder="Nome">
+                        <label for="floatingInput">Nome della ricetta (in minuscolo)</label>
+                    </div>
+
+                    <h4>Categoria:</h4>
+                    <div class="form-floating form-check mb-3 col-2">
+                        <input type="radio" class="form-check-input" id="radio" name="Categoria" value="Primi">
+                        <label for="flexRadioDefault">Primi</label>
+                    </div>
+
+                    <div class="form-floating form-check mb-3 col-2">
+                        <input type="radio" class="form-check-input" id="radio" name="Categoria" value="Secondi">
+                        <label for="flexRadioDefault">Secondi</label>
+                    </div>
+
+                    <div class="form-floating form-check mb-3 col-2">
+                        <input type="radio" class="form-check-input" id="radio" name="Categoria" value="Contorni">
+                        <label for="flexRadioDefault">Contorni</label>
+                    </div>
+
+                    <div class="form-floating form-check mb-3 col-2">
+                        <input type="radio" class="form-check-input" id="radio" name="Categoria" value="Dolci">
+                        <label for="flexRadioDefault">Dolci</label>
+                    </div>
+
+                    <div class="form-floating mb-3 col-12">
+                        <input type="Integer" class="form-control" id="floatingInput" name="Tempo" placeholder="Tempo">
+                        <label for="floatingInput">Tempo di preparazione (in minuti)</label>
+                    </div>
+
+                    <div class="form-floating mb-3 col-12">
+                        <input type="text" class="form-control" id="floatingInput" name="Ingredienti" placeholder="Ingredienti">
+                        <label for="floatingInput">Ingredienti (inanzitutto specifica tra parentesi il numero di persone)</label>
+                    </div>
+
+                    <h4>Difficoltà:</h4>
+                    <div class="form-floating form-check mb-3 col-2">
+                        <input type="radio" class="form-check-input" id="radio" name="Difficoltà" value= 1>
+                        <label for="flexRadioDefault">1</label>
+                    </div>
+
+                    <div class="form-floating form-check mb-3 col-2">
+                        <input type="radio" class="form-check-input" id="radio" name="Difficoltà" value= 2>
+                        <label for="flexRadioDefault">2</label>
+                    </div>
+
+                    <div class="form-floating form-check mb-3 col-2">
+                        <input type="radio" class="form-check-input" id="radio" name="Difficoltà" value= 3>
+                        <label for="flexRadioDefault">3</label>
+                    </div>
+
+                    <div class="form-floating form-check mb-3 col-2">
+                        <input type="radio" class="form-check-input" id="radio" name="Difficoltà" value= 4>
+                        <label for="flexRadioDefault">4</label>
+                    </div>
+
+                    <div class="form-floating form-check mb-3 col-2">
+                        <input type="radio" class="form-check-input" id="radio" name="Difficoltà" value= 5>
+                        <label for="flexRadioDefault">5</label>
+                    </div>
+
+                    <div class="form-floating mb-3 col-12">
+                        <input type="text" class="form-control" id="floatingInput" name="Descrizione" placeholder="Descrizione">
+                        <label for="floatingInput">Descrizione della preparazione</label>
+                    </div>
+
+                    <div class="form-floating mb-3 col-12">
+                        <input type="file" class="form-control" id="floatingInput" name="Immagine.url"placeholder="Immagine">
+                        <label for="floatingInput"></label>
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-success">Conferma</button>
+                    </div>
+         </form>
+     </div>
+{% endblock %}

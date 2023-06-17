@@ -1,0 +1,41 @@
+{% extends 'ricette/common.html' %}
+
+{% block content %}
+    <!-- Image and text -->
+    <nav class="navbar" style="background-color: darkorange;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'accesso' %}">
+                {% load static %}
+                <img src="{% static 'ricette/logo3.png' %}" alt="" width="35" height="30" class="d-inline-block align-top" style="background-color: transparent;">
+                <span class="text-dark">Cucinando</span>
+            </a>
+        </div>
+    </nav>
+    <div class="container my-5 text-center" style="max-width:580px">
+        <h2>Ecco qua i tuoi preferiti {{ request.session.user }}!</h2>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            {% for ricetta in utente.preferiti.all %}
+
+                <div class="col-lg-3">
+                    <div class="card" style="width: 100%;">
+                        <img src="{{ ricetta.immagine.url }}" class="card-img-top" alt="..." style="height: 340px;">
+                    </div>
+                </div>
+                <div class="col-lg-9 border border-orange">
+                    <div class="card-body">
+                        <h5 class="card-title"><span style="text-transform: uppercase;">{{ ricetta.nome }}</span></h5>
+                        <p class="card-text"><span style="text-transform: uppercase;">Tempo di Preparazione:</span> {{ ricetta.tempo }} minuti</p>
+                        <p class="card-text"><span style="text-transform: uppercase;">Difficoltà: </span>{{ ricetta.difficoltà }}/5</p>
+                        <p class="card-text"><span style="text-transform: uppercase;">Ingredienti: </span>{{ ricetta.ingredienti }}</p>
+                        <p class="card-text"><span style="text-transform: uppercase;">Preparazione: </span>{{ ricetta.descrizione }}</p>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

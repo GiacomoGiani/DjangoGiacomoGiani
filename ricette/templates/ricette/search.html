@@ -1,0 +1,71 @@
+{% extends 'ricette/common.html' %}
+
+{% block content %}
+    <!-- Image and text -->
+    <nav class="navbar" style="background-color: darkorange;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                {% load static %}
+                <img src="{% static 'ricette/logo3.png' %}" alt="" width="35" height="30" class="d-inline-block align-top" style="background-color: transparent;">
+                <span class="text-dark">Cucinando</span>
+            </a>
+
+            <div class="dropend">
+                <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" >
+                    Categorie Prodotti
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a href="{% url 'primi' %}" class="dropdown-item" href="#">Primi</a></li>
+                    <li><a href="{% url 'secondi' %}" class="dropdown-item" href="#">Secondi</a></li>
+                    <li><a href="{% url 'contorni' %}" class="dropdown-item" href="#">Contorni</a></li>
+                    <li><a href="{% url 'dolci' %}" class="dropdown-item" href="#">Dolci</a></li>
+                </ul>
+            </div>
+
+            <form class="d-flex" role="search" method="get" style="margin-right: -3%">
+                <input class="form-control me-2" name="query" type="search" placeholder="Cerca Ricetta" aria-label="Search">
+                <button class="btn btn-dark" type="submit">Search</button>
+            </form>
+
+            <a style="margin-left: -3%" href="{% url 'accedi' %}">
+                {% load static %}
+                <img src=" {% static 'ricette/account1.png' %} " alt="" width="35" height="35" class="d-inline-block align-top">
+            </a>
+
+        </div>
+
+    </nav>
+    {% if object != None%}
+        <div class="container my-5 text-center" style="max-width:580px">
+            <h1>Risultati per "{{ object.nome }}"</h1>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card" style="width: 100%;">
+                        <img src="{{ object.immagine.url }}" class="card-img-top" alt="..." style="height: 350px;">
+                    </div>
+                </div>
+                <div class="col-lg-9 border border-orange">
+                    <div class="card-body">
+                        <h5 class="card-title"><span style="text-transform: uppercase;">{{ object.nome }}</span></h5>
+                        <p class="card-text"><span style="text-transform: uppercase;">Tempo di Preparazione:</span> {{ object.tempo }} minuti</p>
+                        <p class="card-text"><span style="text-transform: uppercase;">Difficoltà: </span>{{ object.difficoltà }}/5</p>
+                        <p class="card-text"><span style="text-transform: uppercase;">Ingredienti: </span>{{ object.ingredienti }}</p>
+                        <p class="card-text"><span style="text-transform: uppercase;">Preparazione: </span>{{ object.descrizione }}</p>
+                        <a href="{% url 'accedi' %}" class="btn btn-dark">Aggiungi ai preferiti</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container my-5 text-center" style="max-width:580px; padding-bottom: 19%">
+            <h1>Nessun prodotto trovato</h1>
+            <p class="lead"> Il prodotto che stai cercando ha forse un altro nome... <br>
+                Ricordati di inserire il nome in minuscolo!
+            </p>
+        </div>
+    {% endif %}
+
+{% endblock %}

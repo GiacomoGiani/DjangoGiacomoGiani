@@ -1,0 +1,66 @@
+{% extends 'ricette/common.html' %}
+
+{% block content %}
+    <!-- Image and text -->
+    <nav class="navbar" style="background-color: darkorange;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                    {% load static %}
+                    <img src="{% static 'ricette/logo3.png' %}" alt="" width="35" height="30" class="d-inline-block align-top" style="background-color: transparent;">
+                    <span class="text-dark">Cucinando</span>
+            </a>
+
+            <div class="dropend">
+                <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" >
+                    Categorie Prodotti
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a href="{% url 'primi' %}" class="dropdown-item" href="#">Primi</a></li>
+                    <li><a href="{% url 'secondi' %}" class="dropdown-item" href="#">Secondi</a></li>
+                    <li><a href="{% url 'contorni' %}" class="dropdown-item" href="#">Contorni</a></li>
+                    <li><a href="{% url 'dolci' %}" class="dropdown-item" href="#">Dolci</a></li>
+                </ul>
+            </div>
+
+            <form class="d-flex" role="search" action="/home/search" method="get" style="margin-right: -3%">
+                <input class="form-control me-2" name="query" type="search" placeholder="Cerca Ricetta" aria-label="Search">
+                <button class="btn btn-dark" type="submit">Search</button>
+            </form>
+
+            <a style="margin-left: -3%" href="{% url 'accedi' %}">
+                {% load static %}
+                <img src=" {% static 'ricette/account1.png' %} " alt="" width="35" height="35" class="d-inline-block align-top">
+            </a>
+
+        </div>
+
+    </nav>
+    <div class="container my-5 text-center" style="max-width:700px">
+        <h2>Ora non hai scuse...Non ti resta che cucinare!</h2>
+        <p class="lead">Impara a cucinare, prova nuove ricette, impara dai tuoi errori, non avere paura, ma soprattutto divertiti.</p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            {% for ricetta in ricette %}
+                <div class="col-lg-3">
+                    <div class="card" style="width: 100%;">
+                        <img src="{{ ricetta.immagine.url }}" class="card-img-top" alt="..." style="height: 340px;">
+                    </div>
+                </div>
+                <div class="col-lg-9 border border-orange">
+                    <div class="card-body">
+                        <h5 class="card-title"><span style="text-transform: uppercase;">{{ ricetta.nome }}</span></h5>
+                        <p class="card-text"><span style="text-transform: uppercase;">Tempo di Preparazione:</span> {{ ricetta.tempo }} minuti</p>
+                        <p class="card-text"><span style="text-transform: uppercase;">Difficoltà: </span>{{ ricetta.difficoltà }}/5</p>
+                        <p class="card-text"><span style="text-transform: uppercase;">Ingredienti: </span>{{ ricetta.ingredienti }}</p>
+                        <p class="card-text"><span style="text-transform: uppercase;">Preparazione: </span>{{ ricetta.descrizione }}</p>
+                        <a href="{% url 'accedi' %}" class="btn btn-dark">Aggiungi ai preferiti</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+
