@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Ricetta(models.Model):
-    immagine = models.ImageField()
+    """immagine = models.ImageField()"""
     nome = models.CharField(max_length=30)
     ingredienti = models.CharField(max_length=2000)
     difficoltà = models.IntegerField(default=1)
