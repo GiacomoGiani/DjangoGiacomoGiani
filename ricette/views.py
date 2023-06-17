@@ -195,6 +195,6 @@ def aggiungi(request):
                     "error": "Ricetta già presente"
                 }
                 return render(request, 'ricette/aggiungi.html', context)
-        ricetta_object = Ricetta.objects.create("""immagine=immagine""", nome=nome, ingredienti=ingredienti, difficoltà=difficoltà, tempo=tempo, descrizione=descrizione, categoria=categoria)
+        ricetta_object = Ricetta.objects.create(nome=nome, ingredienti=ingredienti, difficoltà=difficoltà, tempo=tempo, descrizione=descrizione, categoria=categoria)
         return redirect('/home/accesso')
     return render(request, 'ricette/aggiungi.html', {})
